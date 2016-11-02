@@ -37,6 +37,9 @@ if(!empty($_POST)){
 	openssl_csr_export($requete, $requeteOut);
 	openssl_x509_export($certificat, $certificatOut);
 
+	if(!file_exists("files"))
+		mkdir("files", 0777);
+
 	file_put_contents("./files/privateKey.pem",$privateKeyOut);
 	file_put_contents("./files/requete.txt",$requeteOut);
 	file_put_contents("./files/certificat.crt",$certificatOut);
@@ -130,7 +133,7 @@ if(!empty($_POST)){
 						<li class="list-group-item">
 							<a class="btn btn-primary btn-lg" href="../download.php?path='.getcwd().'/files/certificat.crt">Certificat</a>
 						</li></
-					ul>
+					</ul>
 				</div>';
 			}
 		?>
