@@ -3,12 +3,12 @@
 if(!empty($_POST)){
 	$dn = array(
 		"commonName" => $_POST["commonName"],
-		"organizationName" => $_POST["organizationName"],
-		"organizationalUnitName" => $_POST["organizationalUnitName"],
 		"emailAddress" => $_POST["emailAddress"],
 		"localityName" => $_POST["localityName"],
 		"stateOrProvinceName" => $_POST["stateOrProvinceName"],
-		"countryName" => $_POST["countryName"]
+		"countryName" => $_POST["countryName"],
+		"organizationName" => $_POST["organizationName"],
+		"organizationalUnitName" => $_POST["organizationalUnitName"]
 	);
 
 	$configargs = array(
@@ -22,27 +22,26 @@ if(!empty($_POST)){
 	$privateKey = openssl_pkey_new($configargs);
 	/* Création de la requète */
 	$requete = openssl_csr_new($dn, $privateKey, $configargs);
-	/* Création du cértificat */
-	$certificat =openssl_csr_sign($requete,null,$privateKey,1095,$configargs);
-
-	if(!file_exists("files"))
-		mkdir("files", 0777);
-
+	/* Création du cértificat signé avec le certificat de l'exercice A*/
+	$certificat = openssl_csr_sign($requete,
+	"file://" . dirname(__FILE__) . "/../Exercice_A/files/certificat.crt",
+	"file://" . dirname(__FILE__) . "/../Exercice_A/files/privateKey.key",
+	365,$configargs);
 
 	/*Exportation de la clé, requete et certificat sous forme de fichiers */
+
 	openssl_pkey_export_to_file($privateKey , "" . dirname(__FILE__) . "/files/privateKey.key",NULL,$configargs);
 	openssl_csr_export_to_file($requete , "" . dirname(__FILE__) . "/files/requete.txt");
 	openssl_x509_export_to_file($certificat , "" . dirname(__FILE__) . "/files/certificat.crt");
 
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>EDS - Exercice A</title>
+		<title>EDS - Exercice B</title>
 	</head>
 	<link rel="stylesheet" href="../style/paper.css" media="screen" title="no title">
 	<!-- Font Awesome-->
@@ -54,7 +53,7 @@ if(!empty($_POST)){
 
 		<h1>Echanges sécurisés de données sur réseaux</h1>
     <h2>Utilisation d'OpenSSL pour PHP</h2>
-		<h3>Générer un certificat racine d'une autorité de certification</h3>
+		<h3>Générer un certificat personnel à partir d'un certificat racine</h3>
 
 		<div class="col-lg-8">
 
@@ -62,27 +61,15 @@ if(!empty($_POST)){
 				<fieldset>
 	    		<legend>Formulaire</legend>
 						<div class="form-group">
-							<label class="col-lg-2 control-label" for="">Nom de l'organistion</label>
+							<label class="col-lg-2 control-label" for="">Prénom Nom</label>
 							<div class="col-lg-10">
-								<input class="form-control" type="text" name="commonName" value="Université de Nice Sophia Antipolis">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label" for="">Acronyme</label>
-							<div class="col-lg-10">
-								<input class="form-control" type="text" name="organizationName" value="UNSA">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label" for="">Nom de l'unité</label>
-							<div class="col-lg-10">
-								<input class="form-control" type="text" name="organizationalUnitName" value="LPSIL">
+								<input class="form-control" type="text" name="commonName" value="Jean-François Pastel">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-2 control-label" for="">E-mail</label>
 							<div class="col-lg-10">
-								<input class="form-control" type="text" name="emailAddress" value="contact@unsa.fr">
+								<input class="form-control" type="text" name="emailAddress" value="jfpastel@skyblog.fr">
 							</div>
 						</div>
 						<div class="form-group">
@@ -103,6 +90,22 @@ if(!empty($_POST)){
 								<input class="form-control" type="text" name="countryName" value="FR">
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label" for="">Organisation</label>
+							<div class="col-lg-10">
+								<input class="form-control" type="text" name="organizationName" value="UNSA">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label" for="">Nom de l'unité</label>
+							<div class="col-lg-10">
+								<input class="form-control" type="text" name="organizationalUnitName" value="LPSIL">
+							</div>
+						</div>
+
+
+
+
 						<div class="form-group">
 				      <div class="col-lg-10 col-lg-offset-2">
 				        <button class="btn btn-default" type="reset">Cancel</button>
@@ -146,7 +149,7 @@ if(!empty($_POST)){
 				echo '
 					<ul class="list-group">
 						<li class="list-group-item">
-							<a class="btn btn-primary btn-lg" href="../download.php?path='.getcwd().'/files/privateKey.key">Clé privée</a>
+							<a class="btn btn-primary btn-lg" href="../download.php?path='.getcwd().'/files/privateKey.pem">Clé privée</a>
 						</li>
 						<li class="list-group-item">
 							<a class="btn btn-primary btn-lg" href="../download.php?path='.getcwd().'/files/requete.txt">Requete</a>
