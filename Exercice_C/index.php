@@ -42,6 +42,7 @@ if(!empty($_POST)){
         <h1>Echanges sécurisés de données sur réseaux</h1>
     <h2>Utilisation d'OpenSSL pour PHP</h2>
 		<h3>Chiffrement/déchiffrement pour assurer la confidentialité</h3>
+        <hr>
 
 		<div class="col-lg-8">
 
@@ -82,10 +83,11 @@ if(!empty($_POST)){
         echo $decrypt_text;
     ?></textarea>
 </fieldset>
-</div>
-
 <?php //Bouton retour
 echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
 ?>
+</div>
+
+
     </body>
     </html>

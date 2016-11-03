@@ -24,7 +24,7 @@
     $inputName='file';
     include("../upload.php");
 
-    $pubkeyid = file_get_contents("./files/publicKey.pem");
+    $pubkeyid = file_get_contents("./files/publicKey.key");
     $pubkeyid = openssl_pkey_get_public($pubkeyid);
     //var_dump($pubkeyid);
 
@@ -50,7 +50,8 @@
 
     <h2>Utilisation d'OpenSSL pour PHP</h2>
 
-    <h3>Signature d'un document</h3>
+    <h3>Vérification de la signature d'un document</h3>
+    <hr>
 
     <div class="col-lg-9">
       <form class="form-horizontal" action="index.php#" method="post" enctype="multipart/form-data">
@@ -76,8 +77,7 @@
           </div>
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-              <button class="btn btn-default" type="reset">Annulé</button>
-              <button id=btn_valid class="btn btn-primary" type="submit">Validé</button>
+              <button id=btn_valid class="btn btn-primary" type="submit">Envoyer</button>
             </div>
         </div>
         </fieldset>
@@ -106,10 +106,12 @@
       }
 
       ?>
+
+      <?php //Bouton retour
+      echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
+      ?>
     </div>
-    <?php //Bouton retour
-    echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
-    ?>
+
   </body>
 
 </html>

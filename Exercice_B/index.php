@@ -47,8 +47,9 @@ if(!empty($_POST)){
 	<body>
 
 		<h1>Echanges sécurisés de données sur réseaux</h1>
-    <h2>Utilisation d'OpenSSL pour PHP</h2>
+    	<h2>Utilisation d'OpenSSL pour PHP</h2>
 		<h3>Générer un certificat personnel à partir d'un certificat racine</h3>
+	    <hr>
 
 		<div class="col-lg-8">
 
@@ -103,12 +104,14 @@ if(!empty($_POST)){
 
 						<div class="form-group">
 				      <div class="col-lg-10 col-lg-offset-2">
-				        <button class="btn btn-default" type="reset">Cancel</button>
-				        <button class="btn btn-primary" type="submit">Submit</button>
+				        <button class="btn btn-primary" type="submit">Envoyer</button>
 				      </div>
 		    	</div>
 				</fieldset>
 			</form>
+			<?php //Bouton retour
+			echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
+			?>
 		</div>
 
 		<?php
@@ -156,8 +159,6 @@ if(!empty($_POST)){
 				</div>';
 			}
 		?>
-		<?php //Bouton retour
-		echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
-		?>
+
 	</body>
 </html>

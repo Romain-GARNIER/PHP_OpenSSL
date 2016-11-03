@@ -50,9 +50,10 @@ if(!empty($_POST)){
 		<h1>Echanges sécurisés de données sur réseaux</h1>
     <h2>Utilisation d'OpenSSL pour PHP</h2>
 		<h3>Générer un certificat racine d'une autorité de certification</h3>
+	    <hr>
 
 		<div class="col-lg-8">
-
+			<!-- Formulaire -->
 			<form class="form-horizontal" action="index.php" method="post">
 				<fieldset>
 	    		<legend>Formulaire</legend>
@@ -100,12 +101,14 @@ if(!empty($_POST)){
 						</div>
 						<div class="form-group">
 				      <div class="col-lg-10 col-lg-offset-2">
-				        <button class="btn btn-default" type="reset">Cancel</button>
-				        <button class="btn btn-primary" type="submit">Submit</button>
+				        <button class="btn btn-primary" type="submit">Envoyer</button>
 				      </div>
 		    	</div>
 				</fieldset>
 			</form>
+			<?php //Bouton retour
+			echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
+			?>
 		</div>
 
 		<?php
@@ -115,7 +118,7 @@ if(!empty($_POST)){
 				echo '<div class="col-lg-3">
 						<ul class="list-group" style="list-style-type: none;">
 						    <li>Génération d\'une clé privée   ';
-				if (!empty($privateKey) && $privateKey!=null)
+				if (!empty($privateKey) && $privateKey!=null) //Affiche l'icon correspondant à la reussite ou echec de la création de la clé
 		    		echo "<i class=\"fa fa-check-square-o\" aria-hidden=\"true\"></i>";
 				else
 					echo "<i class=\"fa fa-times\" aria-hidden=\"true\"></i>";
@@ -153,8 +156,6 @@ if(!empty($_POST)){
 				</div>';
 			}
 		?>
-		<?php //Bouton retour
-		echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
-		?>
+
 	</body>
 </html>
