@@ -21,10 +21,7 @@
 
     $file=file_get_contents($chemin.'/'.$nom.'.'.$extension);
 
-    $configargs = array(
-  		"config" =>
-  		"C:\\Program Files (x86)\\EasyPHP-Devserver-16.1\\eds-binaries\\php\\php704vc14x86x161003104536\\extras\\ssl\\openssl.cnf"
-  	);
+	include '../config.php';
 
   	$privateKey = openssl_pkey_new($configargs);
     $priv_key_id=openssl_pkey_get_private($privateKey);
