@@ -107,7 +107,9 @@
 
       ?>
     </div>
-
+    <?php //Bouton retour
+    echo '<a href=".\..\"> <input type="button" value="Retour" /> </a>'
+    ?>
   </body>
 
 </html>
